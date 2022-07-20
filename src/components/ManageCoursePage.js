@@ -12,7 +12,7 @@ const ManageCoursePage = (props) => {
   });
 
   function handleChange({ target }) {
-    setCourse({ course, [target.name]: target.value });
+    setCourse({ ...course, [target.name]: target.value });
   }
 
   function handleSubmit(event) {
