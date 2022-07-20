@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import CourseForm from './CourseForm';
 import * as courseApi from '../api/courseApi';
 import { toast } from 'react-toastify';
@@ -13,6 +13,14 @@ const ManageCoursePage = (props) => {
     slug: '',
     category: '',
   });
+
+  const { slug } = useParams();
+
+  useEffect(() => {
+    if ({ slug }) {
+      courseApi.getCourseBySlug(slug).then((_course) => setCourse(_course));
+    }
+  }, [slug]);
 
   function handleChange({ target }) {
     setCourse({ ...course, [target.name]: target.value });
