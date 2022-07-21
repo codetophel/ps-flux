@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CourseForm from './CourseForm';
-import * as courseApi from '../api/courseApi';
+// import * as courseApi from '../api/courseApi';
+import courseStore from '../stores/courseStore';
+import * as courseActions from '../actions/courseActions';
 import { toast } from 'react-toastify';
 
 const ManageCoursePage = (props) => {
@@ -18,7 +20,7 @@ const ManageCoursePage = (props) => {
 
   useEffect(() => {
     if ({ slug }) {
-      courseApi.getCourseBySlug(slug).then((_course) => setCourse(_course));
+      setCourse(courseStore.getCourseBySlug(slug));
     }
   }, [slug]);
 
@@ -42,7 +44,7 @@ const ManageCoursePage = (props) => {
   function handleSubmit(event) {
     event.preventDefault();
     if (!formIsValid()) return;
-    courseApi.saveCourse(course).then(() => {
+    courseActions.saveCourse(course).then(() => {
       history('/courses');
       toast.success('Course saved successfully');
     });
