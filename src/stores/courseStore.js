@@ -3,7 +3,7 @@ import Dispatcher from '../appDispatcher';
 import actionTypes from '../actions/actionTypes';
 import { useParams } from 'react-router-dom';
 
-const CHANGE_EVENT = 'CHANGE';
+const CHANGE_EVENT = 'change';
 let _courses = [];
 let slug = useParams;
 
@@ -13,13 +13,13 @@ class CourseStore extends EventEmitter {
   }
 
   removeChangeListener(callback) {
-    this.removeChangeListener(CHANGE_EVENT, callback);
+    this.removeListener(CHANGE_EVENT, callback);
   }
 
   emitChange() {
     this.emit(CHANGE_EVENT);
   }
-  getCourse() {
+  getCourses() {
     return _courses;
   }
 
