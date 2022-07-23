@@ -10,3 +10,21 @@ export function saveCourse(course) {
     });
   });
 }
+
+export function loadCourse() {
+  return courseApi.loadCourse().then((savedCourse) => {
+    dispatcher.dispatch({
+      actionType: actionTypes.LOAD_COURSES,
+      course: savedCourse,
+    });
+  });
+}
+
+export function deleteCourse(id) {
+  return courseApi.deleteCourse(id).then((savedCourse) => {
+    dispatcher.dispatch({
+      actionType: actionTypes.DELETE_COURSES,
+      course: savedCourse,
+    });
+  });
+}
