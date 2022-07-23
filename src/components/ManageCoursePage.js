@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 const ManageCoursePage = (props) => {
   const [errors, setErrors] = useState({});
+  const [courses, setCourses] = useState(courseStore.getCourses());
   const [course, setCourse] = useState({
     id: null,
     title: '',
@@ -19,13 +20,21 @@ const ManageCoursePage = (props) => {
   const { slug } = useParams();
 
   useEffect(() => {
-    if ({ slug }) {
+    courseStore.addChangeListener(onChange);
+    if (courses.length === 0) {
+      courseActions.loadCourses();
+    } else if ({ slug }) {
       setCourse(courseStore.getCourseBySlug(slug));
     }
-  }, [slug]);
+    return () => courseStore.removeChangeListener(onChange);
+  }, [courses.length, slug]);
 
   function handleChange({ target }) {
     setCourse({ ...course, [target.name]: target.value });
+  }
+
+  function onChange() {
+    setCourses(courseStore.getCourses());
   }
 
   function formIsValid() {
