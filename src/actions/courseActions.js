@@ -12,7 +12,7 @@ export function saveCourse(course) {
 }
 
 export function loadCourse() {
-  return courseApi.loadCourse().then((savedCourse) => {
+  return courseApi.getCourses().then((savedCourse) => {
     dispatcher.dispatch({
       actionType: actionTypes.LOAD_COURSES,
       course: savedCourse,
