@@ -22,7 +22,7 @@ const ManageCoursePage = (props) => {
   useEffect(() => {
     courseStore.addChangeListener(onChange);
     if (courses.length === 0) {
-      courseActions.loadCourses();
+      courseActions.loadCourse();
     } else if ({ slug }) {
       setCourse(courseStore.getCourseBySlug(slug));
     }
