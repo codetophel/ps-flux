@@ -14,10 +14,10 @@ export function saveCourse(course) {
 }
 
 export function loadCourse() {
-  return courseApi.getCourses().then((savedCourse) => {
+  return courseApi.getCourses().then((courses) => {
     dispatcher.dispatch({
       actionType: actionTypes.LOAD_COURSES,
-      course: savedCourse,
+      courses: courses,
     });
   });
 }
@@ -25,8 +25,8 @@ export function loadCourse() {
 export function deleteCourse(id) {
   return courseApi.deleteCourse(id).then((savedCourse) => {
     dispatcher.dispatch({
-      actionType: actionTypes.DELETE_COURSES,
-      course: savedCourse,
+      actionType: actionTypes.DELETE_COURSE,
+      id: id,
     });
   });
 }

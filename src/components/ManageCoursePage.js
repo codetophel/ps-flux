@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CourseForm from './CourseForm';
-// import * as courseApi from '../api/courseApi';
 import courseStore from '../stores/courseStore';
 import * as courseActions from '../actions/courseActions';
 import { toast } from 'react-toastify';
